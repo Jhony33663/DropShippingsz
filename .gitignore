@@ -1,0 +1,22 @@
+# Logs y binarios
+*.log
+geckodriver.log
+*.exe
+chromedriver.exe
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.env
+.venv/
+env/
+venv/
+
+# Node.js
+node_modules/
+dist/
+.DS_Store
+
+# Sesiones de Instaloader
+*.session
