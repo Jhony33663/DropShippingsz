@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panas Bikers | Biker Dropshipping & Market Intelligence Dashboard (Quito)</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            pb: {
+              orange: '#ff5500',
+              orangeHover: '#e04b00',
+              dark: '#0e1118',
+              card: '#141824',
+              border: '#23293d',
+              green: '#22c55e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    ::-webkit-scrollbar { height: 6px; width: 6px; }
+    ::-webkit-scrollbar-track { background: #0e1118; }
+    ::-webkit-scrollbar-thumb { background: #23293d; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #ff5500; }
+    .tab-btn.active {
+      background-color: #ff5500;
+      color: #ffffff;
+      border-color: #ff5500;
+    }
+  </style>
+</head>
+<body class="bg-pb-dark text-slate-100 min-h-screen antialiased p-3 sm:p-6 font-sans selection:bg-pb-orange selection:text-white">
+
+  <div class="max-w-7xl mx-auto space-y-6">
+
+    <!-- Top Navigation & Header -->
+    <header class="bg-pb-card/90 backdrop-blur-md border border-pb-border rounded-3xl p-6 shadow-2xl flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+      <div class="space-y-1.5">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-orange-500/10 text-pb-orange border border-orange-500/20">
+          <span class="w-2 h-2 rounded-full bg-pb-orange animate-ping"></span>
+          Panas Bikers · E-Commerce Biker & COD Intelligence Quito 2026
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white flex items-center gap-3">
+          <span>🏍️</span> Panas Bikers Intelligence Dashboard
+        </h1>
+        <p class="text-sm text-slate-400">
+          Monitoreo de tiendas moteras en Quito, scoring con IA, análisis de engagement y swipe file de creativos virales con pago contra entrega.
+        </p>
+      </div>
+
+      <!-- Quick KPI Strip -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-pb-dark/80 p-3.5 rounded-2xl border border-pb-border text-center">
+        <div class="px-3 border-r border-pb-border">
+          <div class="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Nicho</div>
+          <div class="text-sm font-bold text-pb-orange mt-0.5">Accesorios Biker</div>
+        </div>
+        <div class="px-3 sm:border-r border-pb-border">
+          <div class="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Margen Neto</div>
+          <div class="text-sm font-bold text-pb-green mt-0.5">44.2% Limpio</div>
+        </div>
+        <div class="px-3 border-r border-pb-border">
+          <div class="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Entrega COD</div>
+          <div class="text-sm font-bold text-emerald-400 mt-0.5">92.4% Éxito</div>
+        </div>
+        <div class="px-3">
+          <div class="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Ticket Medio</div>
+          <div class="text-sm font-bold text-yellow-400 mt-0.5">$38.50 USD</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="flex flex-wrap gap-2 border-b border-pb-border pb-3">
+      <button onclick="switchTab('catalogo')" id="tab-btn-catalogo" class="tab-btn active px-4 py-2 rounded-xl text-sm font-semibold transition border border-transparent bg-pb-card hover:border-pb-orange">
+        <i class="fa fa-boxes-stacked mr-1.5"></i> Catálogo Ganador & Márgenes
+      </button>
+      <button onclick="switchTab('competencia')" id="tab-btn-competencia" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition border border-transparent bg-pb-card hover:border-pb-orange">
+        <i class="fa fa-chart-line mr-1.5"></i> Radar Competitivo Quito
+      </button>
+      <button onclick="switchTab('swipefile')" id="tab-btn-swipefile" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition border border-transparent bg-pb-card hover:border-pb-orange">
+        <i class="fa fa-video mr-1.5"></i> Swipe File de Reels Virales (Hooks 3s)
+      </button>
+      <button onclick="switchTab('playbook')" id="tab-btn-playbook" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition border border-transparent bg-pb-card hover:border-pb-orange">
+        <i class="fa fa-truck-fast mr-1.5"></i> Playbook COD & Scripts WhatsApp
+      </button>
+      <button onclick="switchTab('calculadora')" id="tab-btn-calculadora" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition border border-transparent bg-pb-card hover:border-pb-orange">
+        <i class="fa fa-calculator mr-1.5"></i> Simulador Financiero Unitario
+      </button>
+    </div>
+
+    <!-- TAB 1: CATÁLOGO GANADOR & MÁRGENES -->
+    <div id="tab-catalogo" class="space-y-6">
+      <div class="bg-pb-card border border-pb-border rounded-2xl p-6 shadow-xl">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 class="text-xl font-bold text-white flex items-center gap-2">
+              <i class="fa fa-fire text-pb-orange"></i> Matriz de Productos Ganadores Biker (Quito COD)
+            </h2>
+            <p class="text-sm text-slate-400">Scoring de IA validado por alta demanda, solución a dolores graves y márgenes superiores al 40%.</p>
+          </div>
+          <div class="inline-flex items-center gap-2 bg-pb-dark px-3 py-1.5 rounded-lg border border-pb-border text-xs text-slate-300">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span> 8 Productos Activos en Catálogo
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-sm">
+            <thead>
+              <tr class="border-b border-pb-border text-slate-400 text-xs uppercase tracking-wider">
+                <th class="py-3 px-4">Producto & Dolor Resuelto</th>
+                <th class="py-3 px-3">Categoría</th>
+                <th class="py-3 px-3 text-center">Deal Score</th>
+                <th class="py-3 px-3 text-right">Costo Base</th>
+                <th class="py-3 px-3 text-right">Flete Quito</th>
+                <th class="py-3 px-3 text-right">PVP Quito</th>
+                <th class="py-3 px-3 text-right text-pb-green">Margen Neto</th>
+                <th class="py-3 px-4 text-center">Acción</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-pb-border/50">
+              <!-- Item 1 -->
+              <tr class="hover:bg-pb-dark/40 transition">
+                <td class="py-3.5 px-4 font-semibold text-white">
+                  <div class="flex items-center gap-3">
+                    <span class="p-2 bg-orange-500/10 text-pb-orange rounded-lg"><i class="fa fa-lock"></i></span>
+                    <div>
+                      <div>Candado de Disco Alarma 110dB</div>
+                      <div class="text-xs text-slate-400 font-normal">Antirrobo veredas, sensor piezoeléctrico</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-3.5 px-3"><span class="px-2 py-0.5 bg-red-500/10 text-red-400 text-xs rounded border border-red-500/20">Seguridad</span></td>
+                <td class="py-3.5 px-3 text-center font-bold text-emerald-400">96 / 100</td>
+                <td class="py-3.5 px-3 text-right text-slate-300">$6.20</td>
+                <td class="py-3.5 px-3 text-right text-slate-300">$2.80</td>
+                <td class="py-3.5 px-3 text-right font-bold text-white">$22.00</td>
+                <td class="py-3.5 px-3 text-right font-extrabold text-pb-green">+$9.50 (43.2%)</td>
+                <td class="py-3.5 px-4 text-center">
+                  <a href="post-evitar-robo-moto-quito-antirrobo" class="px-3 py-1 bg-pb-orange/20 text-pb-orange hover:bg-pb-orange hover:text-white rounded-lg text-xs font-semibold transition">Ver Guía</a>
+                </td>
+              </tr>
+
+              <!-- Item 2 -->
+              <tr class="hover:bg-pb-dark/40 transition">
+                <td class="py-3.5 px-4 font-semibold text-white">
+                  <div class="flex items-center gap-3">
+                    <span class="p-2 bg-yellow-500/10 text-yellow-400 rounded-lg"><i class="fa fa-lightbulb"></i></span>
+                    <div>
+                      <div>Exploradoras Búho Dual Ámbar/Blanco</div>
+                      <div class="text-xs text-slate-400 font-normal">Niebla Papallacta/Alóag, lentes bifocales</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-3.5 px-3"><span class="px-2 py-0.5 bg-yellow-500/10 text-yellow-400 text-xs rounded border border-yellow-500/20">Iluminación</span></td>
+                <td class="py-3.5 px-3 text-center font-bold text-emerald-400">94 / 100</td>
+                <td class="py-3.5 px-3 text-right text-slate-300">$12.50</td>
+                <td class="py-3.5 px-3 text-right text-slate-300">$3.00</td>
+                <td class="py-3.5 px-3 text-right font-bold text-white">$35.00</td>
+                <td class="py-3.5 px-3 text-right font-extrabold text-pb-green">+$14.50 (41.4%)</td>
+                <td class="py-3.5 px-4 text-center">
+                  <a href="post-luces-led-neblineros-moto-ecuador" class="px-3 py-1 bg-pb-orange/20 text-pb-orange hover:bg-pb-orange hover:text-white rounded-lg text-xs font-semibold transition">Ver Guía</a>
+                </td>
+              </tr>
+
+              <!-- Item 3 -->
+              <tr class="hover:bg-pb-dark/40 transition">
+                <td class="py-3.5 px-4 font-semibold text-white">
+                  <div class="flex items-center gap-3">
+                    <span class="p-2 bg-blue-500/10 text-blue-400 rounded-lg"><i class="fa fa-mobile-screen"></i></span>
+                    <div>
+                      <div>Soporte Celular Aluminio CNC</div>
+                      <div class="text-xs text-slate-400 font-normal">Protege OIS iPhone/Samsung de vibraciones</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-3.5 px-3"><span class="px-2 py-0.5 bg-blue-500/10 text-blue-400 text-xs rounded border border-blue-500/20">Gadgets</span></td>
+                <td class="py-3.5 px-3 text-center font-bold text-emerald-400">92 / 100</td>
+                <td class="py-3.5 px-3 text-right text-slate-300">$8.00</td>
+                <td class="py-3.5 px-3 text-right text-slate-300">$2.80</td>
+                <td class="py-3.5 px-3 text-right font-bold text-white">$24.00</td>
+                <td class="py-3.5 px-3 text-right font-extrabold text-pb-green">+$9.70 (40.4%)</td>
+                <td class="py-3.5 px-4 text-center">
+                  <a href="post-soporte-celular-moto-vibra-camara" class="px-3 py-1 bg-pb-orange/20 text-pb-orange hover:bg-pb-orange hover:text-white rounded-lg text-xs font-semibold transition">Ver Guía</a>
+                </td>
+              </tr>
+
+              <!-- Item 4 -->
+              <tr class="hover:bg-pb-dark/40 transition">
+                <td class="py-3.5 px-4 font-semibold text-white">
+                  <div class="flex items-center gap-3">
+                    <span class="p-2 bg-purple-500/10 text-purple-400 rounded-lg"><i class="fa fa-shoe-prints"></i></span>
+                    <div>
+                      <div>Botas SPEED Racing Antitorsión</div>
+                      <div class="text-xs text-slate-400 font-normal">Protección maléolo, sliders TPU, antideslizante</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-3.5 px-3"><span class="px-2 py-0.5 bg-purple-500/10 text-purple-400 text-xs rounded border border-purple-500/20">Indumentaria</span></td>
+                <td class="py-3.5 px-3 text-center font-bold text-emerald-400">95 / 100</td>
+                <td class="py-3.5 px-3 text-right text-slate-300">$26.00</td>
+                <td class="py-3.5 px-3 text-right text-slate-300">$3.50</td>
+                <td class="py-3.5 px-3 text-right font-bold text-white">$74.00</td>
+                <td class="py-3.5 px-3 text-right font-extrabold text-pb-green">+$37.50 (50.7%)</td>
+                <td class="py-3.5 px-4 text-center">
+                  <a href="post-botas-moto-seguridad-tobillo-vs-zapatillas" class="px-3 py-1 bg-pb-orange/20 text-pb-orange hover:bg-pb-orange hover:text-white rounded-lg text-xs font-semibold transition">Ver Guía</a>
+                </td>
+              </tr>
+
+              <!-- Item 5 -->
+              <tr class="hover:bg-pb-dark/40 transition">
+                <td class="py-3.5 px-4 font-semibold text-white">
+                  <div class="flex items-center gap-3">
+                    <span class="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg"><i class="fa fa-bell"></i></span>
+                    <div>
+                      <div>Alarma 125dB con 2 Controles</div>
+                      <div class="text-xs text-slate-400 font-normal">Corte de encendido, arranque a distancia</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-3.5 px-3"><span class="px-2 py-0.5 bg-red-500/10 text-red-400 text-xs rounded border border-red-500/20">Seguridad</span></td>
+                <td class="py-3.5 px-3 text-center font-bold text-emerald-400">90 / 100</td>
+                <td class="py-3.5 px-3 text-right text-slate-300">$7.50</td>
+                <td class="py-3.5 px-3 text-right text-slate-300">$2.80</td>
+                <td class="py-3.5 px-3 text-right font-bold text-white">$26.00</td>
+                <td class="py-3.5 px-3 text-right font-extrabold text-pb-green">+$11.70 (45.0%)</td>
+                <td class="py-3.5 px-4 text-center">
+                  <a href="catalog" class="px-3 py-1 bg-slate-800 text-slate-300 hover:text-white rounded-lg text-xs font-semibold transition">Catálogo</a>
+                </td>
+              </tr>
+
+              <!-- Item 6 -->
+              <tr class="hover:bg-pb-dark/40 transition">
+                <td class="py-3.5 px-4 font-semibold text-white">
+                  <div class="flex items-center gap-3">
+                    <span class="p-2 bg-cyan-500/10 text-cyan-400 rounded-lg"><i class="fa fa-mitten"></i></span>
+                    <div>
+                      <div>Guantes Pro-Biker Táctiles Nudillos</div>
+                      <div class="text-xs text-slate-400 font-normal">Fibra de carbono, grip palanca y pantalla táctil</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-3.5 px-3"><span class="px-2 py-0.5 bg-purple-500/10 text-purple-400 text-xs rounded border border-purple-500/20">Indumentaria</span></td>
+                <td class="py-3.5 px-3 text-center font-bold text-emerald-400">89 / 100</td>
+                <td class="py-3.5 px-3 text-right text-slate-300">$4.50</td>
+                <td class="py-3.5 px-3 text-right text-slate-300">$2.50</td>
+                <td class="py-3.5 px-3 text-right font-bold text-white">$16.00</td>
+                <td class="py-3.5 px-3 text-right font-extrabold text-pb-green">+$6.50 (40.6%)</td>
+                <td class="py-3.5 px-4 text-center">
+                  <a href="catalog" class="px-3 py-1 bg-slate-800 text-slate-300 hover:text-white rounded-lg text-xs font-semibold transition">Catálogo</a>
+                </td>
+              </tr>
+
+              <!-- Item 7 -->
+              <tr class="hover:bg-pb-dark/40 transition">
+                <td class="py-3.5 px-4 font-semibold text-white">
+                  <div class="flex items-center gap-3">
+                    <span class="p-2 bg-indigo-500/10 text-indigo-400 rounded-lg"><i class="fa fa-cloud-showers-heavy"></i></span>
+                    <div>
+                      <div>Impermeable 2 Piezas Termosellado</div>
+                      <div class="text-xs text-slate-400 font-normal">Chaqueta + pantalón con reflectivo 3M para lluvia</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-3.5 px-3"><span class="px-2 py-0.5 bg-purple-500/10 text-purple-400 text-xs rounded border border-purple-500/20">Indumentaria</span></td>
+                <td class="py-3.5 px-3 text-center font-bold text-emerald-400">91 / 100</td>
+                <td class="py-3.5 px-3 text-right text-slate-300">$9.50</td>
+                <td class="py-3.5 px-3 text-right text-slate-300">$3.00</td>
+                <td class="py-3.5 px-3 text-right font-bold text-white">$28.00</td>
+                <td class="py-3.5 px-3 text-right font-extrabold text-pb-green">+$12.00 (42.8%)</td>
+                <td class="py-3.5 px-4 text-center">
+                  <a href="catalog" class="px-3 py-1 bg-slate-800 text-slate-300 hover:text-white rounded-lg text-xs font-semibold transition">Catálogo</a>
+                </td>
+              </tr>
+
+              <!-- Item 8 -->
+              <tr class="hover:bg-pb-dark/40 transition">
+                <td class="py-3.5 px-4 font-semibold text-white">
+                  <div class="flex items-center gap-3">
+                    <span class="p-2 bg-red-600/10 text-red-500 rounded-lg"><i class="fa fa-oil-can"></i></span>
+                    <div>
+                      <div>Aceite Motul 7100 4T 10W-40 Sintético</div>
+                      <div class="text-xs text-slate-400 font-normal">Ester anti-fricción, producto gancho recurrente</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-3.5 px-3"><span class="px-2 py-0.5 bg-emerald-500/10 text-emerald-400 text-xs rounded border border-emerald-500/20">Mecánica</span></td>
+                <td class="py-3.5 px-3 text-center font-bold text-emerald-400">93 / 100</td>
+                <td class="py-3.5 px-3 text-right text-slate-300">$13.80</td>
+                <td class="py-3.5 px-3 text-right text-slate-300">$2.50</td>
+                <td class="py-3.5 px-3 text-right font-bold text-white">$20.50</td>
+                <td class="py-3.5 px-3 text-right font-extrabold text-yellow-400">+$2.70 (Gancho)</td>
+                <td class="py-3.5 px-4 text-center">
+                  <a href="post-viscosidad-aceite-moto-fabricante" class="px-3 py-1 bg-pb-orange/20 text-pb-orange hover:bg-pb-orange hover:text-white rounded-lg text-xs font-semibold transition">Ver Guía</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: RADAR COMPETITIVO QUITO -->
+    <div id="tab-competencia" class="space-y-6 hidden">
+      <div class="bg-pb-card border border-pb-border rounded-2xl p-6 shadow-xl space-y-6">
+        <div>
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <i class="fa fa-radar text-pb-orange"></i> Radar de Tiendas & Mayoristas de Motos en Quito
+          </h2>
+          <p class="text-sm text-slate-400">Auditoría de perfiles en Instagram y Google Maps identificando brechas operativas y de conversión.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Card 1 -->
+          <div class="bg-pb-dark border border-pb-border rounded-xl p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold px-2 py-1 bg-slate-800 text-slate-300 rounded">Rank #1</span>
+              <span class="text-xs text-amber-400 font-semibold"><i class="fa fa-users"></i> ~50K seguidores</span>
+            </div>
+            <h3 class="text-base font-bold text-white">@tiendamoteraec</h3>
+            <p class="text-xs text-slate-400">Enfocados en cascos caros y chaquetas en local físico. No hacen envíos en el día con motorizado ni tienen opción de prueba de tallas en casa.</p>
+            <div class="pt-2 border-t border-pb-border text-xs text-pb-orange font-semibold">
+              🎯 Brecha Panas: Entrega en 3h en Quito + Pago Contra Entrega.
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-pb-dark border border-pb-border rounded-xl p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold px-2 py-1 bg-slate-800 text-slate-300 rounded">Rank #2</span>
+              <span class="text-xs text-amber-400 font-semibold"><i class="fa fa-users"></i> ~35K seguidores</span>
+            </div>
+            <h3 class="text-base font-bold text-white">@motosquito</h3>
+            <p class="text-xs text-slate-400">Tienen buen alcance en reels mostrando motos y sliders, pero dicen "Precio al DM" y tardan más de 6 horas en responder por WhatsApp.</p>
+            <div class="pt-2 border-t border-pb-border text-xs text-pb-orange font-semibold">
+              🎯 Brecha Panas: Precios públicos, specs claras y checkout directo.
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bg-pb-dark border border-pb-border rounded-xl p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold px-2 py-1 bg-slate-800 text-slate-300 rounded">Rank #3</span>
+              <span class="text-xs text-amber-400 font-semibold"><i class="fa fa-users"></i> ~40K seguidores</span>
+            </div>
+            <h3 class="text-base font-bold text-white">@procircuit_ec</h3>
+            <p class="text-xs text-slate-400">Dirigidos al segmento touring/enduro de alta cilindrada (BMW, KTM). Desatienden por completo a los repartidores y motos urbanas de 125-250cc.</p>
+            <div class="pt-2 border-t border-pb-border text-xs text-pb-orange font-semibold">
+              🎯 Brecha Panas: Productos de alta gama a precio justo para Pulsar, Shineray, Suzuki.
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="bg-pb-dark border border-pb-border rounded-xl p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold px-2 py-1 bg-slate-800 text-slate-300 rounded">Rank #4</span>
+              <span class="text-xs text-amber-400 font-semibold"><i class="fa fa-users"></i> ~25K seguidores</span>
+            </div>
+            <h3 class="text-base font-bold text-white">@importadoramotos_uio</h3>
+            <p class="text-xs text-slate-400">Bodega al por mayor en La Marín. No ofrecen garantía al consumidor final, no dan asesoría técnica de instalación y no aceptan tarjetas ni Deuna.</p>
+            <div class="pt-2 border-t border-pb-border text-xs text-pb-orange font-semibold">
+              🎯 Brecha Panas: Garantía de 30 días cambio mano a mano + Deuna QR.
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="bg-pb-dark border border-pb-border rounded-xl p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold px-2 py-1 bg-slate-800 text-slate-300 rounded">Rank #5</span>
+              <span class="text-xs text-amber-400 font-semibold"><i class="fa fa-users"></i> Marketplace FB</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Vendedores Informales FB</h3>
+            <p class="text-xs text-slate-400">Piden anticipos por transferencia a desconocidos, mandan accesorios de plástico quebradizo o fotos falsas. Clientes con alto temor a la estafa.</p>
+            <div class="pt-2 border-t border-pb-border text-xs text-pb-orange font-semibold">
+              🎯 Brecha Panas: Marca registrada, sitio web seguro y cobro en la puerta.
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="bg-pb-dark border border-pb-border rounded-xl p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold px-2 py-1 bg-emerald-500/20 text-emerald-400 rounded">Líder CRO</span>
+              <span class="text-xs text-pb-orange font-semibold">E-Commerce Puro</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Panas Bikers (Scalanze)</h3>
+            <p class="text-xs text-slate-400">Guías técnicas AEO indexadas en Google, videos de tortura física, WhatsApp automatizado y motorizados con doble talla para calzado.</p>
+            <div class="pt-2 border-t border-pb-border text-xs text-emerald-400 font-semibold">
+              🚀 Ventaja: Retención >92% y ROAS superior a 4.0x.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: SWIPE FILE DE REELS VIRALES -->
+    <div id="tab-swipefile" class="space-y-6 hidden">
+      <div class="bg-pb-card border border-pb-border rounded-2xl p-6 shadow-xl space-y-6">
+        <div>
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <i class="fa fa-clapperboard text-pb-orange"></i> Swipe File: 4 Guiones Virales para Reels & TikTok (Outliers)
+          </h2>
+          <p class="text-sm text-slate-400">Estructura psicológica probada: Gancho destructivo en 3 segundos, agitación del dolor local y CTA con pago contra entrega.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Reel 1 -->
+          <div class="bg-pb-dark border border-pb-border rounded-xl p-5 space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-1 bg-red-500/10 text-red-400 font-bold text-xs rounded border border-red-500/20">Reel 1: Antirrobo Veredas</span>
+              <span class="text-xs text-slate-400 font-mono">30 Segundos</span>
+            </div>
+            <h3 class="text-base font-bold text-white">"Así se jalaron una Pulsar en la Villa Flora en 20s"</h3>
+            <div class="space-y-2 text-xs text-slate-300">
+              <p><strong class="text-pb-orange">[0-3s Hook]:</strong> Video real de cámara de seguridad con alarma aguda sonando. Texto: "Si dejas tu nave con candado de ferretería... mira esto 🚫".</p>
+              <p><strong class="text-yellow-400">[4-10s Dolor]:</strong> "El seguro de manillar se parte en 3 segundos con una patada. En Quito ya no respetan ni el parqueadero del banco."</p>
+              <p><strong class="text-emerald-400">[11-21s Demo]:</strong> Toque leve a la moto y explosión de la sirena de 110dB del candado de disco de acero cementado. Mostrar que es impermeable.</p>
+              <p><strong class="text-cyan-400">[22-30s CTA]:</strong> "Te lo llevamos hoy mismo a tu casa o trabajo en Quito. Lo pruebas y lo pagas en efectivo al recibir."</p>
+            </div>
+          </div>
+
+          <!-- Reel 2 -->
+          <div class="bg-pb-dark border border-pb-border rounded-xl p-5 space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-1 bg-yellow-500/10 text-yellow-400 font-bold text-xs rounded border border-yellow-500/20">Reel 2: Niebla Papallacta</span>
+              <span class="text-xs text-slate-400 font-mono">30 Segundos</span>
+            </div>
+            <h3 class="text-base font-bold text-white">"Por qué la luz blanca LED es tu enemiga en la niebla"</h3>
+            <div class="space-y-2 text-xs text-slate-300">
+              <p><strong class="text-pb-orange">[0-3s Hook]:</strong> Vista subjetiva en carretera con niebla espesa donde la luz blanca rebota creando una pared cegadora.</p>
+              <p><strong class="text-yellow-400">[4-10s Dolor]:</strong> "En la vía a Papallacta o Alóag, un camión parado te aparece encima si usas luces que encandilan sin penetrar."</p>
+              <p><strong class="text-emerald-400">[11-21s Demo]:</strong> Encendido de las Exploradoras Búho Dual en haz ámbar 3000K: corte láser que penetra 150m sin reflejo espejo.</p>
+              <p><strong class="text-cyan-400">[22-30s CTA]:</strong> "Bases reforzadas, relé incluido y pago contra entrega en Quito. Pide tu par tocando el botón."</p>
+            </div>
+          </div>
+
+          <!-- Reel 3 -->
+          <div class="bg-pb-dark border border-pb-border rounded-xl p-5 space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 font-bold text-xs rounded border border-blue-500/20">Reel 3: Destrucción de Cámara</span>
+              <span class="text-xs text-slate-400 font-mono">30 Segundos</span>
+            </div>
+            <h3 class="text-base font-bold text-white">"Tu moto está rompiendo el estabilizador de tu celular"</h3>
+            <div class="space-y-2 text-xs text-slate-300">
+              <p><strong class="text-pb-orange">[0-3s Hook]:</strong> Pantalla de iPhone vibrando desenfocada con sonido de zumbido. Texto: "¡Reparación de $150 por soporte barato! 📱💥".</p>
+              <p><strong class="text-yellow-400">[4-10s Dolor]:</strong> "Los motores monocilíndricos generan frecuencias que quiebran los resortes del sensor OIS en Waze."</p>
+              <p><strong class="text-emerald-400">[11-21s Demo]:</strong> Martillazo a un soporte de plástico (se quiebra) vs golpe al soporte Panas Bikers CNC de aluminio (intacto con pads de goma absorbente).</p>
+              <p><strong class="text-cyan-400">[22-30s CTA]:</strong> "Salva tu celular hoy mismo. Entrega express en Quito con pago contra entrega en efectivo o Deuna."</p>
+            </div>
+          </div>
+
+          <!-- Reel 4 -->
+          <div class="bg-pb-dark border border-pb-border rounded-xl p-5 space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-1 bg-purple-500/10 text-purple-400 font-bold text-xs rounded border border-purple-500/20">Reel 4: Zapatillas vs Asfalto</span>
+              <span class="text-xs text-slate-400 font-mono">30 Segundos</span>
+            </div>
+            <h3 class="text-base font-bold text-white">"A 40 km/h, una zapatilla dura 0.3 segundos en el asfalto"</h3>
+            <div class="space-y-2 text-xs text-slate-300">
+              <p><strong class="text-pb-orange">[0-3s Hook]:</strong> Zapatilla de lona destrozada contra el piso. Voz firme: "El 65% de fracturas en Quito son de tobillo."</p>
+              <p><strong class="text-yellow-400">[4-10s Dolor]:</strong> "Un zapato casual sale volando en el impacto. El hueso del maléolo queda raspando directo en el asfalto."</p>
+              <p><strong class="text-emerald-400">[11-21s Demo]:</strong> Mostrar la rigidez antitorsión de las botas SPEED Racing, sliders de titanio y suela que agarra en aceite mojado.</p>
+              <p><strong class="text-cyan-400">[22-30s CTA]:</strong> "¿Dudas de tu talla? Nuestro motorizado te lleva dos tallas a tu casa en Quito para que te las midas antes de pagar."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: PLAYBOOK COD & SCRIPTS WHATSAPP -->
+    <div id="tab-playbook" class="space-y-6 hidden">
+      <div class="bg-pb-card border border-pb-border rounded-2xl p-6 shadow-xl space-y-6">
+        <div>
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <i class="fa fa-whatsapp text-emerald-400"></i> Protocolo Antifraude WhatsApp (Tasa de Rechazo &lt; 8%)
+          </h2>
+          <p class="text-sm text-slate-400">Guiones de confirmación en dos pasos listos para copiar y pegar para el equipo de ventas y despachos.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Script 1 -->
+          <div class="bg-pb-dark border border-pb-border rounded-xl p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-400 font-bold text-xs rounded">Paso 1: Confirmación Inmediata</span>
+              <button onclick="copyText('script1')" class="text-xs text-pb-orange hover:underline"><i class="fa fa-copy"></i> Copiar</button>
+            </div>
+            <pre id="script1" class="text-xs text-slate-300 whitespace-pre-wrap font-sans bg-slate-900/60 p-3.5 rounded-lg border border-slate-800 leading-relaxed">
+¡Qué tal, mi pana! 🏍️ Te saludamos de Panas Bikers Ecuador.
+
+Acabamos de registrar tu pedido de:
+👉 [Nombre del Producto] — Total: $[Monto] USD.
+
+Para coordinar la ruta de nuestro motorizado hoy mismo con Pago Contra Entrega en Quito:
+
+📍 Dirección exacta: [Sector, Calle Principal, Número y Secundaria]
+🏢 Referencia: (ej. Casa de 2 pisos frente a farmacia / Conjunto)
+⏰ Horario para recibir: (Mañana 9am-1pm / Tarde 2pm-6pm)
+
+¿Nos confirmas si estos datos están correctos para alistar tu paquete?</pre>
+          </div>
+
+          <!-- Script 2 -->
+          <div class="bg-pb-dark border border-pb-border rounded-xl p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 font-bold text-xs rounded">Paso 2: Motorizado en Camino</span>
+              <button onclick="copyText('script2')" class="text-xs text-pb-orange hover:underline"><i class="fa fa-copy"></i> Copiar</button>
+            </div>
+            <pre id="script2" class="text-xs text-slate-300 whitespace-pre-wrap font-sans bg-slate-900/60 p-3.5 rounded-lg border border-slate-800 leading-relaxed">
+¡Pana, tu pedido va en camino! 🚀
+
+Nuestro repartidor [Nombre] llegará a tu dirección aproximadamente a las [Hora estimada].
+
+💰 Total a pagar: $[Monto] USD exactos.
+📱 Métodos aceptados: Efectivo, Banco Pichincha directo o Deuna QR al recibir.
+
+(Recuerda que puedes revisar el producto y probarlo antes de pagar).
+¡Cualquier novedad nos avisas por aquí! ✌️</pre>
+          </div>
+        </div>
+
+        <!-- Cobertura y Tarifas -->
+        <div class="border-t border-pb-border pt-6">
+          <h3 class="text-base font-bold text-white mb-3">Tarifas y Tiempos de Entrega Motorizado en Quito (DMQ)</h3>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+            <div class="bg-pb-dark p-3 rounded-xl border border-pb-border">
+              <div class="text-xs text-slate-400">Quito Norte / Centro</div>
+              <div class="text-base font-bold text-white mt-1">2 a 5 horas</div>
+              <div class="text-xs text-pb-orange font-semibold">$2.50 – $3.00</div>
+            </div>
+            <div class="bg-pb-dark p-3 rounded-xl border border-pb-border">
+              <div class="text-xs text-slate-400">Quito Sur</div>
+              <div class="text-base font-bold text-white mt-1">3 a 6 horas</div>
+              <div class="text-xs text-pb-orange font-semibold">$3.00 – $3.50</div>
+            </div>
+            <div class="bg-pb-dark p-3 rounded-xl border border-pb-border">
+              <div class="text-xs text-slate-400">Cumbayá / Los Chillos</div>
+              <div class="text-base font-bold text-white mt-1">Mismo Día</div>
+              <div class="text-xs text-pb-orange font-semibold">$3.50 – $4.50</div>
+            </div>
+            <div class="bg-pb-dark p-3 rounded-xl border border-pb-border">
+              <div class="text-xs text-slate-400">Provincias (Nacional)</div>
+              <div class="text-base font-bold text-white mt-1">24 a 48 horas</div>
+              <div class="text-xs text-emerald-400 font-semibold">$5.00 – $6.50 COD</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: SIMULADOR FINANCIERO -->
+    <div id="tab-calculadora" class="space-y-6 hidden">
+      <div class="bg-pb-card border border-pb-border rounded-2xl p-6 shadow-xl space-y-6">
+        <div>
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <i class="fa fa-calculator text-pb-orange"></i> Simulador Financiero Unitario Biker (Quito)
+          </h2>
+          <p class="text-sm text-slate-400">Calcula el margen neto real, ROAS de equilibrio y ganancia proyectada por cada campaña.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <!-- Inputs -->
+          <div class="space-y-4 bg-pb-dark p-5 rounded-xl border border-pb-border">
+            <h3 class="text-sm font-bold text-white uppercase tracking-wider">Parámetros del Producto</h3>
+            <div>
+              <label class="block text-xs text-slate-400 mb-1">Precio de Venta al Público (PVP en Quito) - USD</label>
+              <input type="number" id="calc-pvp" value="24.00" step="0.5" oninput="calculateFinance()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white font-bold focus:border-pb-orange focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-xs text-slate-400 mb-1">Costo Base del Producto (Mayorista / Dropi) - USD</label>
+              <input type="number" id="calc-cost" value="8.00" step="0.5" oninput="calculateFinance()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white font-bold focus:border-pb-orange focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-xs text-slate-400 mb-1">Costo de Flete Motorizado Local - USD</label>
+              <input type="number" id="calc-flete" value="2.80" step="0.1" oninput="calculateFinance()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white font-bold focus:border-pb-orange focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-xs text-slate-400 mb-1">Costo de Adquisición de Cliente (CPA Ads) - USD</label>
+              <input type="number" id="calc-cpa" value="3.50" step="0.5" oninput="calculateFinance()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white font-bold focus:border-pb-orange focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-xs text-slate-400 mb-1">Tasa Estimada de Devolución / Rechazo en Puerta (%)</label>
+              <input type="number" id="calc-return" value="7.5" step="0.5" oninput="calculateFinance()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white font-bold focus:border-pb-orange focus:outline-none">
+            </div>
+          </div>
+
+          <!-- Outputs -->
+          <div class="space-y-4 bg-gradient-to-br from-pb-dark to-slate-900 p-6 rounded-xl border border-pb-border flex flex-col justify-between">
+            <div>
+              <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Resultados Financieros Limpios</h3>
+              
+              <div class="space-y-3">
+                <div class="flex justify-between items-center py-2 border-b border-slate-800">
+                  <span class="text-xs text-slate-400">Margen Bruto (PVP - Costo):</span>
+                  <span id="res-bruto" class="font-bold text-white text-base">$16.00</span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-slate-800">
+                  <span class="text-xs text-slate-400">Costo Operativo Total (Costo+Flete+CPA):</span>
+                  <span id="res-total-cost" class="font-semibold text-slate-300 text-sm">$14.30</span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-slate-800">
+                  <span class="text-xs text-slate-400">Pérdida por Devolución Ponderada:</span>
+                  <span id="res-loss-return" class="font-semibold text-red-400 text-sm">$0.21</span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-slate-800">
+                  <span class="text-xs text-slate-400 font-bold text-yellow-400">ROAS de Equilibrio (Break-Even):</span>
+                  <span id="res-roas" class="font-extrabold text-yellow-400 text-base">1.75x</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-pb-card p-4 rounded-xl border border-emerald-500/30 mt-6 text-center">
+              <div class="text-xs text-slate-400 uppercase font-semibold">Ganancia Neta Limpia por Unidad Vendida</div>
+              <div id="res-neto" class="text-3xl font-extrabold text-pb-green mt-1">+$9.49</div>
+              <div id="res-percent" class="text-xs text-emerald-400 font-bold mt-0.5">39.5% de Margen Neto Limpio</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-6 text-xs text-slate-500 border-t border-pb-border">
+      Panas Bikers Ecuador &copy; 2026 · Infraestructura y Tecnología desarrollada por Scalanze Growth AI
+    </footer>
+
+  </div>
+
+  <!-- JavaScript Logics -->
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById('tab-btn-' + tabId);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      ['catalogo', 'competencia', 'swipefile', 'playbook', 'calculadora'].forEach(id => {
+        const el = document.getElementById('tab-' + id);
+        if (el) el.classList.add('hidden');
+      });
+      const activeEl = document.getElementById('tab-' + tabId);
+      if (activeEl) activeEl.classList.remove('hidden');
+    }
+
+    function copyText(elementId) {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("¡Guión copiado al portapapeles!");
+      });
+    }
+
+    function calculateFinance() {
+      const pvp = parseFloat(document.getElementById('calc-pvp').value) || 0;
+      const cost = parseFloat(document.getElementById('calc-cost').value) || 0;
+      const flete = parseFloat(document.getElementById('calc-flete').value) || 0;
+      const cpa = parseFloat(document.getElementById('calc-cpa').value) || 0;
+      const returnRate = (parseFloat(document.getElementById('calc-return').value) || 0) / 100;
+
+      const margenBruto = pvp - cost;
+      const totalCost = cost + flete + cpa;
+      const returnLoss = (flete * returnRate);
+      const neto = pvp - (totalCost + returnLoss);
+      const percent = pvp > 0 ? (neto / pvp) * 100 : 0;
+      const breakEvenRoas = cpa > 0 ? (pvp / (pvp - (cost + flete))) : 0;
+
+      document.getElementById('res-bruto').innerText = '$' + margenBruto.toFixed(2);
+      document.getElementById('res-total-cost').innerText = '$' + totalCost.toFixed(2);
+      document.getElementById('res-loss-return').innerText = '$' + returnLoss.toFixed(2);
+      document.getElementById('res-roas').innerText = (isFinite(breakEvenRoas) && breakEvenRoas > 0 ? breakEvenRoas.toFixed(2) : '1.80') + 'x';
+      document.getElementById('res-neto').innerText = (neto >= 0 ? '+' : '') + '$' + neto.toFixed(2);
+      document.getElementById('res-percent').innerText = percent.toFixed(1) + '% de Margen Neto Limpio';
+    }
+
+    // Run initial calculation
+    calculateFinance();
+  </script>
+</body>
+</html>
